@@ -1,0 +1,55 @@
+.App-header {
+  background-color: #404040;
+  padding: 20px;
+  color: white;
+}
+
+body {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+.paragraph {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.product {
+  border: 1px #404040 solid;
+  margin: 1rem;
+}
+
+.products {
+  display: flex;
+}
+
+.product img {
+  width: 100%;
+  max-width: 400px;
+}
+
+.product-info {
+  padding: 1rem;
+}
+
+.rating span {
+  color: #ffc000;
+  font-weight: 300;
+}
+
+.btn-primary {
+  background-color: #ffc000;
+  color: black;
+}
+
+a:hover {
+  opacity: 1;
+}
+
+img {
+  min-width: 100%;
+}
+
