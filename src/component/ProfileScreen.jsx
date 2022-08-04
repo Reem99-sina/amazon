@@ -29,7 +29,6 @@ export default function ProfileScreen() {
     })
     const sumbitHandler = async (e) => {
         e.preventDefault()
-        // console.log(userInfo.user.userName)
         try {
             const { data } = await axios.put("/api/users/profile", {
                 userName, email, password
