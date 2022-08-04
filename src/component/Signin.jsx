@@ -23,7 +23,7 @@ export default function Signin() {
     const submitHandler = async (e) => {
         e.preventDefault()
         try {
-            const { data } = await axios.post("/api/users/signin", {
+            const { data } = await axios.post("https://amazon99.herokuapp.com/api/users/signin", {
                 email, password
             })
             ctxDispatch({ type: "USER_SIGNIN", payload: data })

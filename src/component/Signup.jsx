@@ -27,7 +27,7 @@ export default function Signup() {
             return;
         }
         // try {
-        const { data } = await axios.post("/api/users/signup", {
+        const { data } = await axios.post("https://amazon99.herokuapp.com/api/users/signup", {
             userName, email, password
         })
         if (data.error) {

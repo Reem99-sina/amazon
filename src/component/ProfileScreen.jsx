@@ -30,7 +30,7 @@ export default function ProfileScreen() {
     const sumbitHandler = async (e) => {
         e.preventDefault()
         try {
-            const { data } = await axios.put("/api/users/profile", {
+            const { data } = await axios.put("https://amazon99.herokuapp.com/api/users/profile", {
                 userName, email, password
             }, { headers: { Authorization: `Bearer ${userInfo.userToken}` } })
             console.log(data)

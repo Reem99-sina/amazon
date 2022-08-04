@@ -49,7 +49,7 @@ export default function Placeorder() {
     const placeOrderHandler = async () => {
         try {
             dispatch({ type: "CREATE_SUCCESS" })
-            const { data } = await axios.post('/api/orders/', {
+            const { data } = await axios.post('https://amazon99.herokuapp.com/api/orders/', {
                 orderItems: cart.cartItem,
                 shippingAddress: cart.shippingAddress,
                 paymentMethod: cart.paymentMethod,

@@ -1,7 +1,6 @@
 {
   "homepage": "https://Reem99-sina.github.io/amazon",
   "name": "shoeshop",
-  "proxy": "https://amazon99.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

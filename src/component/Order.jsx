@@ -50,7 +50,7 @@ export default function Order() {
         const fetchOrder = async () => {
             try {
                 dispatch({ type: "FETCH_REQUEST" });
-                const { data } = await axios.get(`/api/orders/${orderId}`, {
+                const { data } = await axios.get(`https://amazon99.herokuapp.com/api/orders/${orderId}`, {
                     headers: {
                         authorization: `Bearer ${userInfo.userToken}`
                     }

@@ -51,7 +51,7 @@ export default function Productslug() {
     const addtoCart = async () => {
         const existItem = cart.cartItem.find((x) => x._id === product._id)
         const quantity = existItem ? existItem.quantity + 1 : 1;
-        const { data } = await axios.get(`/api/products/${product._id}`)
+        const { data } = await axios.get(`https://amazon99.herokuapp.com/api/products/${product._id}`)
         if (data.countInStock < quantity) {
             window.alert('sorry, product is out stock')
             return;
