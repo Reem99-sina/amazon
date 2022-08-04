@@ -76,6 +76,7 @@ function App() {
           <Container>
             <Routes>
               <Route path='/' element={<Home />} />
+              <Route path='*' element={<Home />} />
               <Route path='/product/slug/:slug' element={<Productslug />} />
               <Route path='/signin' element={<Signin />} />
               <Route path='/cart' element={<Cart />} />
