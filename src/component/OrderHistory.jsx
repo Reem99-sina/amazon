@@ -33,6 +33,7 @@ export default function OrderHistory() {
     useEffect(() => {
         const fetchData = async () => {
             dispatch({ type: "FETCH_REQUEST" })
+            console.log(userInfo.userToken)
             try {
                 const { data } = await axios.get("https://amazon99.herokuapp.com/api/orders/mine", {
                     headers: { Authorization: `Bearer ${userInfo.userToken}` }

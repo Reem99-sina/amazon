@@ -38,7 +38,7 @@ export default function Productslug() {
         const fetchData = async () => {
             dispatch({ type: "FETCH_REQUER" })
             try {
-                const result = await axios.get(`/api/products/slug/${slug}`)
+                const result = await axios.get(`https://amazon99.herokuapp.com/api/products/slug/${slug}`)
                 dispatch({ type: "FETCH_SUCCESS", payload: result.data })
             } catch (error) {
                 dispatch({ type: "FETCH_FAILED", payload: error.message })
