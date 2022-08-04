@@ -33,7 +33,8 @@ export default function Home() {
         const fetchData = async () => {
             dispatch({ type: "FETCH_REQUER" })
             try {
-                const result = await axios.get("/api/products")
+                const result = await axios.get("https://amazon99.herokuapp.com/api/products")
+                console.log(result.data.product)
                 dispatch({ type: "FETCH_SUCCESS", payload: result.data.product })
             } catch (error) {
                 dispatch({ type: "FETCH_FAILED", payload: error.message })
