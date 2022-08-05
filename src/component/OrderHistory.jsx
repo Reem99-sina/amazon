@@ -33,13 +33,12 @@ export default function OrderHistory() {
     useEffect(() => {
         const fetchData = async () => {
             dispatch({ type: "FETCH_REQUEST" })
-            console.log(userInfo.userToken)
+            console.log(userInfo)
             try {
                 const { data } = await axios.get("https://amazon99.herokuapp.com/api/orders/mine", {
                     headers: { Authorization: `Bearer ${userInfo.userToken}` }
                 })
                 console.log(data)
-
                 dispatch({ type: "FETCH_SUCCESS", payload: data.orders })
             } catch (error) {
                 dispatch({ type: "FETCH_FALIED", payload: error })

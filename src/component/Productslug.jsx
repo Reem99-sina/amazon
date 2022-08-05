@@ -39,7 +39,7 @@ export default function Productslug() {
             try {
                 const result = await axios.get(`https://amazon99.herokuapp.com/api/products/slug/${slug}`)
                 dispatch({ type: "FETCH_SUCCESS", payload: result.data })
-                localStorage.setItem("payload", result.data)
+                // localStorage.setItem("payload", result.data)
             } catch (error) {
                 dispatch({ type: "FETCH_FAILED", payload: error.message })
             }
@@ -52,6 +52,7 @@ export default function Productslug() {
         const existItem = cart.cartItem.find((x) => x._id === product._id)
         const quantity = existItem ? existItem.quantity + 1 : 1;
         const { data } = await axios.get(`https://amazon99.herokuapp.com/api/products/${product._id}`)
+        // localStorage.setItem("payload", data)
         if (data.countInStock < quantity) {
             window.alert('sorry, product is out stock')
             return;
