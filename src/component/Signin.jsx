@@ -66,7 +66,7 @@ export default function Signin() {
                 </div>
                 <div className='mb-3'>
                     New customer? {" "}
-                    <Link to={`/signup?redirect=${redirect}`}> create new customer</Link>
+                    <Link to={`/amazon/signup?redirect=${redirect}`}> create new customer</Link>
                 </div>
             </Form>
         </Container>

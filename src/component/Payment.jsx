@@ -12,7 +12,7 @@ export default function Payment() {
     const [paymentMethodname, setPaymentmethod] = useState()
     useEffect(() => {
         if (!shippingAddress.address) {
-            navigate("/shipping")
+            navigate("/amazon/shipping")
         }
     }, [shippingAddress])
 
@@ -20,7 +20,7 @@ export default function Payment() {
         e.preventDefault()
         ctxDispatch({ type: "SAVE_PAYMENT_METHOD", payload: paymentMethodname })
         localStorage.setItem("paymentMethod", paymentMethodname)
-        navigate("/placeorder")
+        navigate("/amazon/placeorder")
     }
     return (
         <div>

@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "cors": "2.8.5",
     "jsonwebtoken": "^8.5.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
@@ -19,7 +20,10 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.7",
+    "socket.io": "^4.4.0",
+    "socket.io-client": "^4.5.1",
     "use-reducer-logger": "^1.0.2",
+    "uuid": "8.3.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -27,8 +31,9 @@
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/component/Home.jsx",
+    "prettier": "prettier --config .perttierrc.json  src/index.js --write"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +54,9 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0"
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "gh-pages": "^4.0.0",
+    "prettier": "^1.19.1"
   }
 }

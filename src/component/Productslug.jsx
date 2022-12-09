@@ -58,7 +58,7 @@ export default function Productslug() {
             return;
         }
         ctxDispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
-        navigate("/cart")
+        navigate("/amazon/cart")
     }
     return (
         loading ? <Spinner animation='border' role='status'><span className='visually-hidden'>loading...</span></Spinner> : error ? <Alert variant='danger'> {error}</Alert> :

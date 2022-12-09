@@ -16,7 +16,7 @@ export default function Shipping() {
     const navigate = useNavigate()
     useEffect(() => {
         if (!userInfo) {
-            navigate("/signin?redirect=/shipping")
+            navigate("/amazon/signin")
         }
     }, [userInfo])
     const submitshipping = (e) => {
@@ -27,8 +27,8 @@ export default function Shipping() {
                 fullName, address, city, postalcode, country
             }
         })
-        localStorage.setItem("addshipping", JSON.stringify({ fullName, address, city, postalcode,  }))
-        navigate("/payment")
+        localStorage.setItem("addshipping", JSON.stringify({ fullName, address, city, postalcode, }))
+        navigate("/amazon/payment")
     }
     return (<>country
         <Helmet>

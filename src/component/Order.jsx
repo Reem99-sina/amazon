@@ -63,7 +63,7 @@ export default function Order() {
             }
         }
         if (!userInfo) {
-            return navigate("/login")
+            return navigate("/amazon/login")
         }
         if (!order._id || successPay || order._id !== orderId) {
             fetchOrder()
@@ -72,7 +72,7 @@ export default function Order() {
             }
         } else {
             const loadPaypalScript = async () => {
-                const { data: clientId } = await axios.get("/api/keys/paypal", {
+                const { data: clientId } = await axios.get("https://amazon99.herokuapp.com/api/keys/paypal/", {
                     headers: {
                         authorization: `Bearer ${userInfo.userToken}`
                     }
@@ -91,7 +91,7 @@ export default function Order() {
             }
             loadPaypalScript()
         }
-    }, [order, orderId, navigate, userInfo, paypalDispatch])
+    }, [order, orderId, userInfo, paypalDispatch])
     function createOrder(data, actions) {
         return actions.order.create({
             purchase_units: [
@@ -166,7 +166,7 @@ export default function Order() {
                                             <Row className='align-items-center'>
                                                 <Col md={6}>
                                                     <img src={item.image} alt={item.name} className="img-fluid rounded img-thumbnail" />{" "}
-                                                    <Link to={`/product/slug/${item.slug}`}>{item.name}</Link>
+                                                    <Link to={`/amazon/product/slug/${item.slug}`}>{item.name}</Link>
                                                 </Col>
                                                 <Col md={3}>
                                                     <span>{item.quantity}</span>
@@ -178,7 +178,7 @@ export default function Order() {
                                         </ListGroup.Item>)
                                     )}
                                 </ListGroup>
-                                <Link to='/cart'>edit</Link>
+                                <Link to='/amazon/cart'>edit</Link>
                             </Card.Body>
                         </Card>
                     </Col>

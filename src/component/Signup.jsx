@@ -27,7 +27,7 @@ export default function Signup() {
             return;
         }
         // try {
-        const { data } = await axios.post("https://amazon99.herokuapp.com/api/users/signup", {
+        const { data } = await axios.post("https://amazon99.herokuapp.com/api/v1/users/signup", {
             userName, email, password
         })
         if (data.error) {
@@ -85,7 +85,7 @@ export default function Signup() {
                 </div>
                 <div className='mb-3'>
                     Already have an account? {" "}
-                    <Link to={`/signin?redirect=${redirect}`}> signin</Link>
+                    <Link to={`/amazon/signin?redirect=${redirect}`}> signin</Link>
                 </div>
             </Form>
         </Container>

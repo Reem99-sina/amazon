@@ -10,30 +10,28 @@ import { Store } from './store'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import Alert from 'react-bootstrap/esm/Alert'
 import Spinner from 'react-bootstrap/esm/Spinner'
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'CREATE_REQUEST':
+            return { ...state, loading: true };
+        case 'CREATE_SUCCESS':
+            return { ...state, loading: false };
+        case 'CREATE_FAIL':
+            return { ...state, loading: false };
+        default:
+            return state;
+    }
+};
 export default function Placeorder() {
     const navigate = useNavigate()
     const { state, dispatch: ctxDispatch } = useContext(Store)
-    const reducer = (state, action) => {
-        switch (action.type) {
-            case 'CREATE_REQUEST':
-                return { ...state, loading: true }
-            case 'CREATE_SUCCESS':
-                return { ...state, loading: false }
-            case 'CREATE_fail':
-                return { ...state, loading: false }
-            default:
-                return state
-        }
-    }
     const [{ loading }, dispatch] = useReducer(reducer, {
-        loading: true
-    })
+        loading: false,
+    });
     const { cart: { shippingAddress, paymentMethod, cartItem }, userInfo } = state
     const { cart } = state
-    console.log(cartItem)
-
     const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
     cart.itemsPrice = round2(
         cart.cartItem.reduce((a, c) => a + c.quantity * c.price, 0)
@@ -43,35 +41,44 @@ export default function Placeorder() {
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice
     useEffect(() => {
         if (!paymentMethod) {
-            navigate('/payment')
+            navigate('/amazon/payment')
         }
     })
     const placeOrderHandler = async () => {
         try {
-            dispatch({ type: "CREATE_SUCCESS" })
-            const { data } = await axios.post('https://amazon99.herokuapp.com/api/orders/', {
-                orderItems: cart.cartItem,
-                shippingAddress: cart.shippingAddress,
-                paymentMethod: cart.paymentMethod,
-                itemsPrice: cart.itemsPrice,
-                shippingPrice: cart.shippingPrice,
-                taxPrice: cart.taxPrice,
-                totalPrice: cart.totalPrice
-            }, {
-                headers: {
-                    Authorization: `Bearer ${userInfo.userToken}`
-                }
+            console.log(userInfo)
+            dispatch({ type: 'CREATE_REQUEST' });
+            const { data } = await axios.post('http://amazon99.herokuapp.com/api/orders/create',
+                {
+                    orderItems: cart.cartItem,
+                    shippingAddress: cart.shippingAddress,
+                    paymentMethod: cart.paymentMethod,
+                    itemsPrice: cart.itemsPrice,
+                    shippingPrice: cart.shippingPrice,
+                    taxPrice: cart.taxPrice,
+                    totalPrice: cart.totalPrice
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${userInfo.userToken}`,
+                    },
+                },
+            );
+            if (data) {
+                ctxDispatch({ type: 'CART_CLEAR' });
+                dispatch({ type: 'CREATE_SUCCESS' });
+                localStorage.removeItem('cartItems');
+                navigate(`/amazon/order/${data.order._id}`);
+            } else {
+
+                console.log(data.error)
             }
-            )
-            ctxDispatch({ type: "CARD_CLEAR" })
-            dispatch({ type: "CREATE_SUCCESS" })
-            localStorage.removeItem("cartItem")
-            navigate(`/order/${data.order._id}`)
-        } catch (error) {
-            dispatch({ type: "CREATE_fail" })
-            toast.error(`error${error}`)
+
+        } catch (err) {
+            dispatch({ type: 'CREATE_FAIL' });
+            toast.error(err);
         }
-    }
+    };
     return (
         <div>
             <Checkout step1 step2 step3 step4></Checkout>
@@ -89,7 +96,7 @@ export default function Placeorder() {
                                 <strong>address:</strong>{shippingAddress.address}<br />
                                 {shippingAddress.city},{shippingAddress.postalcode},{shippingAddress.country}
                             </Card.Text>
-                            <Link to='/shipping'>edit</Link>
+                            <Link to='/amazon/shipping'>edit</Link>
                         </Card.Body>
                     </Card>
                     <Card className='mb-3'>
@@ -98,7 +105,7 @@ export default function Placeorder() {
                             <Card.Text>
                                 <strong>Method:</strong>{paymentMethod}<br />
                             </Card.Text>
-                            <Link to='/payment'>edit</Link>
+                            <Link to='/amazon/payment'>edit</Link>
                         </Card.Body>
                     </Card>
                     <Card className='mb-3'>
@@ -111,7 +118,7 @@ export default function Placeorder() {
                                         <Row className='align-items-center'>
                                             <Col md={6}>
                                                 <img src={item.image} alt={item.name} className="img-fluid rounded img-thumbnail" />{" "}
-                                                <Link to={`/product/slug/${item.slug}`}>{item.name}</Link>
+                                                <Link to={`/amazon/product/slug/${item.slug}`}>{item.name}</Link>
                                             </Col>
                                             <Col md={3}>
                                                 <span>{item.quantity}</span>
@@ -123,7 +130,7 @@ export default function Placeorder() {
                                     </ListGroup.Item>)
                                 )}
                             </ListGroup>
-                            <Link to='/cart'>edit</Link>
+                            <Link to='/amazon/cart'>edit</Link>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -156,7 +163,7 @@ export default function Placeorder() {
                                             Place order
                                         </Button>
                                     </div>
-                                    {loading && <Spinner animation='border' role='status'><span className='visually-hidden'>loading...</span></Spinner>}
+                                    {loading ? <Spinner animation='border' role='status'><span className='visually-hidden'>loading...</span></Spinner> : ""}
                                 </ListGroup.Item>
                             </ListGroup>
                         </Card.Body>

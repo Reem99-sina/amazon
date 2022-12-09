@@ -33,11 +33,9 @@ export default function ProfileScreen() {
             const { data } = await axios.put("https://amazon99.herokuapp.com/api/users/profile", {
                 userName, email, password
             }, { headers: { Authorization: `Bearer ${userInfo.userToken}` } })
-            console.log(data)
             dispatch({ type: "UPDATE_SUCCESS" })
             ctxDispatch({ type: "USER_SIGNIN", payload: data })
             localStorage.setItem("usersignin", JSON.stringify(data))
-            console.log(data)
             toast.success('user success update')
         } catch (error) {
             dispatch({ type: "UPDATE_FAILED" })

@@ -27,7 +27,7 @@ export default function Product(props) {
     }
     return (
         <Card className="product" >
-            <Link to={`/product/slug/${products.slug}`}>
+            <Link to={`/amazon/product/slug/${products.slug}`}>
                 <img src={products.image} className='card-img-top' alt={products.name} />
             </Link>
             <Card.Body>

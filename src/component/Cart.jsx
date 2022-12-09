@@ -19,7 +19,7 @@ export default function Cart() {
     const { cart: { cartItem } } = state
     console.log(cartItem)
     const updateCartHandler = async (item, quantity) => {
-        const { data } = await axios.get(`api/products/${item._id}`);
+        const { data } = await axios.get(`http://amazon99.herokuapp.com/api/products/${item._id}`);
         if (data.countInStock < quantity) {
             window.alert("Sorry,Product is out of stock");
             return;
@@ -36,7 +36,7 @@ export default function Cart() {
         })
     }
     const checkOut = () => {
-        navigate(`/shipping?redirect=${redirect}`)
+        navigate(`/amazon/shipping?redirect=${redirect}`)
     }
     return (<div>
         <Helmet>
@@ -46,10 +46,9 @@ export default function Cart() {
             <Col md={8}>
                 {cartItem.length === 0 ? (
                     <Alert variant='danger' >
-                        Cart is empty. <Link to="/">Go Shopping</Link>
+                        Cart is empty. <Link to="/amazon/">Go Shopping</Link>
                     </Alert>
                 ) : (
-
                     <ListGroup>
                         {cartItem.map((item) => (
                             <ListGroup.Item key={item._id}>

@@ -77,7 +77,7 @@ export default function OrderHistory() {
                                 <td>{order.isPaid ? order.paidAt : "no"}</td>
                                 <td>{order.isDelivered ? order.deliveredAt : "no"}</td>
                                 <td>
-                                    <Button type="button" variant='light' onClick={() => { navigate(`/order/${order._id}`) }}>Details</Button>
+                                    <Button type="button" variant='light' onClick={() => { navigate(`/amazon/order/${order._id}`) }}>Details</Button>
                                 </td>
 
                             </tr>)
